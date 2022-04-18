@@ -1,59 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/Poppins.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        html, body {
+
+        html,
+        body {
             position: relative;
             height: 100%;
             overflow: hidden;
         }
+
         .card_container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #fbe9e7;
+            background: rgba(255, 211, 219, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        .card_container::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(254, 254, 254, 0.8);
+            background: rgba(254, 254, 254, 0.5);
+            transform: rotate(45deg);
+        }
+
         .card {
             position: relative;
             width: 300px;
             height: 400px;
-            background: #fefefe;
+            background: #ffffff;
+            border-radius: 0 10px 10px 0;
             transform-style: preserve-3d;
             transform: perspective(1000px);
-            box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.2);
             transition: 1s;
         }
-        .card:hover {
+
+        .card.active {
             transform: translateX(50%);
         }
+
         .card .imgBox {
             position: relative;
             width: 100%;
             height: 100%;
-            transform-origin: left;
+            border-radius: 0 10px 10px 0;
             transform-style: preserve-3d;
-            background: #000;
+            transform-origin: left;
             transition: 1s;
             z-index: 1;
+            overflow: hidden;
+        }
+
+        .card.active .imgBox {
+            transform: rotateY(-180deg);
             box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.2);
         }
-        .card:hover .imgBox {
-            transform: rotateY(-180deg);
+
+        .card .imgBox .glass {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            transition: 1s;
         }
+
+        .card.active .imgBox .glass {
+            z-index: 0;
+        }
+
+        .card .imgBox .glass .open {
+            position: relative;
+            width: 120px;
+            height: 40px;
+            background: rgba(254, 254, 254, 0.2);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            border-top: 1px solid rgba(254, 254, 254, 0.8);
+            border-left: 1px solid rgba(254, 254, 254, 0.8);
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: rgba(45, 74, 82, 0.8);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            transition: 0.5s;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .card:hover .imgBox .glass .open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
         .card .imgBox img {
             position: absolute;
             top: 0;
@@ -63,21 +130,39 @@
             object-fit: cover;
             transform-style: preserve-3d;
             backface-visibility: hidden;
+            user-select: none;
         }
+
         .card .imgBox img:nth-child(2) {
             transform: rotateY(180deg);
         }
+
         .card .details {
             position: absolute;
+            padding: 20px;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
+
+        .card .details .line {
+            position: absolute;
+            left: calc(-50% + 2px);
+            top: 50%;
+            width: 100%;
+            height: 4px;
+            transform: rotate(90deg);
+            background: linear-gradient(90deg, #000 0%, #000 50%, transparent 50%, transparent 100%);
+            background-size: 40px;
+        }
+
         .card .details .content {
             position: relative;
             display: flex;
@@ -85,76 +170,176 @@
             align-items: center;
             flex-direction: column;
         }
-        .card .details .content span {
+
+        .card .details .content .greet {
             position: relative;
-            font-family: sans-serif;
-        }
-        .card .details .content .chinese_name {
-            color: #000;
-            font-weight: 800;
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-        .card .details .content .english_name {
-            color: #000;
+            width: 200px;
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
             font-size: 18px;
             letter-spacing: 1px;
+            color: #000000;
+            user-select: none;
         }
+
+        .card .details .content img {
+            position: relative;
+            margin: 8px 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            user-select: none;
+        }
+
+        .card .details .content .englishName {
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #000000;
+            user-select: none;
+        }
+
         .card .details .content .job {
-            color: #e21212;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
             font-size: 16px;
             font-weight: 500;
+            color: rgba(218, 112, 115);
+            text-decoration: underline;
+            user-select: none;
         }
-        .card .details .content .social_icons {
+
+        .card .details .content .cv {
             position: relative;
-            margin-top: 10px;
-            display: flex;
-            flex-direction: row;
-        }
-        .card .details .content .social_icons svg {
-            position: relative;
-            padding: 4px;
-            margin: 4px;
-            width: 36px;
-            height: 36px;
-            fill: #fefefe;
-            background: #333333;
+            margin: 8px 0;
+            padding: 12px 24px;
+            border: 1px solid rgba(83, 112, 114, 0.2);
             border-radius: 4px;
-            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: rgba(83, 112, 114, 0.8);
+            background: rgba(243, 234, 219, 1);
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
             transition: 0.2s;
         }
-        .card .details .content .social_icons svg:hover {
-            background: #e21212;
+        .card .details .content .cv:hover {
+            background: rgba(243, 234, 219, 0.8);
+        }
+
+        .card .details .content .mobile {
+            position: relative;
+            width: 200px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card .details .content .mobile svg {
+            position: relative;
+            margin: 8px;
+            width: 24px;
+            height: 24px;
+            fill: #8e9b97;
+        }
+
+        .card .details .content .mobile span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 100;
+            letter-spacing: 1px;
+            color: #000000;
+        }
+
+        .card .details .content .mail {
+            position: relative;
+            width: 200px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card .details .content .mail svg {
+            position: relative;
+            margin: 8px;
+            width: 24px;
+            height: 24px;
+            fill: #8e9b97;
+        }
+
+        .card .details .content .mail span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 100;
+            letter-spacing: 1px;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            .card.active .imgBox {
+                opacity: 0;
+            }
+
+            .card.active {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
+
 <body>
     <section class="card_container">
         <div class="card">
             <div class="imgBox">
-                <img src="./picture/doge.jpg" alt="">
-                <img src="./picture/doge.jpg" alt="">
+                <div class="glass">
+                    <span class="open">click</span>
+                </div>
+                <img src="./picture/resume.png" alt="">
+                <img src="./picture/resume.png" alt="">
             </div>
             <div class="details">
+                <span class="line"></span>
                 <div class="content">
-                    <span class="chinese_name">許元碩</span>
-                    <span class="english_name">Yuan Shuo Hsu</span>
-                    <span class="job">前端工程師</span>
-                    <div class="social_icons">
+                    <span class="greet">Hi, I am</span>
+                    <img src="./picture/doge.jpg" alt="">
+                    <span class="englishName">Yuan Shuo Hsu</span>
+                    <span class="job">Front-end developer</span>
+                    <a href="" class="cv">Download My CV</a>
+                    <div class="mobile">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path
+                                d="M304 0h-224c-35.35 0-64 28.65-64 64v384c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64V64C368 28.65 339.3 0 304 0zM192 480c-17.75 0-32-14.25-32-32s14.25-32 32-32s32 14.25 32 32S209.8 480 192 480zM304 64v320h-224V64H304z" />
+                        </svg>
+                        <span>0981-140-688</span>
+                    </div>
+                    <div class="mail">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/>
+                            <path
+                                d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                            <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
-                        </svg>
+                        <span>ook1725@gmail.com</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        let card = document.querySelector(".card");
+        let card_container = document.querySelector(".card_container");
+        card.onclick = (e) => {
+            e.stopPropagation();
+            card.classList.add("active");
+        };
+        card_container.onclick = (e) => {
+            card.classList.remove("active");
+        };
+    </script>
 </body>
+
 </html>
