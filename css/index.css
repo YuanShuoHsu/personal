@@ -236,7 +236,7 @@ body {
 }
 
 .card.active .details .content {
-    animation: to-top 1s forwards;
+    animation: to-top 1s;
 }
 
 @keyframes to-top {
