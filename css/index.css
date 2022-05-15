@@ -184,10 +184,10 @@ body {
     opacity: 0;
 }
 
-/* .card:hover .imgBox .glass .open { */
-    /* transform: translateY(0); */
-    /* opacity: 1; */
-/* } */
+.card:hover .imgBox .glass .open {
+    transform: translateY(0);
+    opacity: 1;
+}
 
 .card .imgBox img {
     position: absolute;
