@@ -151,7 +151,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    transition: 1s;
 }
 
 .card.active .imgBox .glass {
@@ -187,10 +186,6 @@ body {
 .card:hover .imgBox .glass .open {
     transform: translateY(0);
     opacity: 1;
-}
-
-.card.active .imgBox .glass .open {
-    pointer-events: none;
 }
 
 .card .imgBox img {
