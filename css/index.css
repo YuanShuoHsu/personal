@@ -156,6 +156,7 @@ body {
 
 .card.active .imgBox .glass {
     z-index: 0;
+    pointer-events: none;
 }
 
 .card .imgBox .glass .open {
