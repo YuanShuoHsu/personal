@@ -178,6 +178,7 @@ body {
     justify-content: center;
     align-items: center;
     user-select: none;
+    cursor: pointer;
     transition: 0.5s;
     transform: translateY(20px);
     opacity: 0;
@@ -297,7 +298,8 @@ body {
 .card .details .content .cv {
     position: relative;
     margin: 8px 0;
-    padding: 12px 24px;
+    width: 150px;
+    height: 40px;
     border: 1px solid rgba(83, 112, 114, 0.2);
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
@@ -317,7 +319,9 @@ body {
 }
 
 .card .details .content .cv:hover {
-    background: rgba(243, 234, 219, 0.8);
+    /* font-size: 18px; */
+    letter-spacing: 2px;
+    background: rgba(243, 234, 219, 0.5);
 }
 
 .card .details .content .mobile {
