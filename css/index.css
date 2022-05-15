@@ -319,7 +319,6 @@ body {
 }
 
 .card .details .content .cv:hover {
-    /* font-size: 18px; */
     letter-spacing: 2px;
     background: rgba(243, 234, 219, 0.5);
 }
