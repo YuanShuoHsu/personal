@@ -151,10 +151,12 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    pointer-events: auto;
 }
 
 .card.active .imgBox .glass {
     z-index: 0;
+    pointer-events: none;
 }
 
 .card .imgBox .glass .open {
