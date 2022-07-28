@@ -302,7 +302,20 @@ const openSwiper = () => {
 
 		.details {
 			.content {
+				-webkit-animation: to-top 1s;
 				animation: to-top 1s;
+			}
+
+			@-webkit-keyframes to-top {
+				0% {
+					-webkit-transform: translateY(20%);
+					-webkit-opacity: 0;
+				}
+
+				100% {
+					-webkit-transform: translateY(0);
+					-webkit-opacity: 1;
+				}
 			}
 
 			@keyframes to-top {
@@ -317,7 +330,6 @@ const openSwiper = () => {
 				}
 			}
 		}
-
 	}
 
 	.card:hover {
@@ -343,7 +355,6 @@ const openSwiper = () => {
 }
 
 @media (max-width: 768px) {
-
 	.cardContainer {
 		.card.active {
 			transform: translateX(0);

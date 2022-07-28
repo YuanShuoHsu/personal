@@ -80,8 +80,8 @@ const closeCard = () => {
 			box-shadow: 0 0 0 5px #dddddd44,
 				0 0 10px #dddddd,
 				0 0 20px #dddddd;
-			animation: adrift 15s linear infinite;
-			animation-duration: calc(120s / var(--i));
+			-webkit-animation: adrift calc(120s / var(--i)) infinite linear;
+			animation: adrift calc(120s / var(--i)) infinite linear;
 		}
 
 		span:nth-child(even) {
@@ -89,6 +89,16 @@ const closeCard = () => {
 			box-shadow: 0 0 0 10px #ff82ba44,
 				0 0 50px #ff82ba,
 				0 0 100px #ff82ba;
+		}
+
+		@-webkit-keyframes adrift {
+			0% {
+				-webkit-transform: translateY(100vh) scale(0);
+			}
+
+			100% {
+				-webkit-transform: translateY(-10vh) scale(1);
+			}
 		}
 
 		@keyframes adrift {
