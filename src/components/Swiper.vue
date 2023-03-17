@@ -68,6 +68,12 @@ const stopSwiper = () => {};
       <swiper-slide @click="closeSwiper">
         <img src="./../assets/img/4.svg" alt="4" @click.stop="stopSwiper" />
       </swiper-slide>
+      <swiper-slide @click="closeSwiper">
+        <img src="./../assets/img/5.svg" alt="5" @click.stop="stopSwiper" />
+      </swiper-slide>
+      <swiper-slide @click="closeSwiper">
+        <img src="./../assets/img/6.svg" alt="6" @click.stop="stopSwiper" />
+      </swiper-slide>
     </swiper>
   </div>
 </template>

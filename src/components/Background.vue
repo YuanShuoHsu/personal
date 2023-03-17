@@ -92,7 +92,6 @@ const closeCard = () => {
       height: 30px;
       border-radius: 50%;
       box-shadow: 0 0 0 5px #dddddd44, 0 0 10px #dddddd, 0 0 20px #dddddd;
-      -webkit-animation: adrift calc(120s / var(--i)) infinite linear;
       animation: adrift calc(120s / var(--i)) infinite linear;
 
       &:nth-child(even) {

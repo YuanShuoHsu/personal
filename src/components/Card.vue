@@ -19,7 +19,7 @@ const openSwiper = () => {
         <div class="glass">
           <span class="open">click</span>
         </div>
-        <img draggable="false" src="./../assets/img/resume.png" alt="resume" />
+        <img draggable="false" src="./../assets/img/resume.svg" alt="resume" />
       </div>
       <div class="details">
         <span class="line"></span>
@@ -113,6 +113,14 @@ const openSwiper = () => {
     transition: 1s;
     pointer-events: auto;
 
+    .details {
+      .content {
+        transform: translateY(20%);
+        opacity: 0;
+        transition: 1s;
+      }
+    }
+
     &.active {
       transform: translateX(50%);
 
@@ -137,19 +145,21 @@ const openSwiper = () => {
         box-shadow: inset 20px 0 20px -10px rgba(0, 0, 0, 0.2),
           10px 20px 40px rgba(0, 0, 0, 0.2);
         .content {
-          animation: to-top 1s;
+          // animation: to-top 1s;
+          transform: translateY(0);
+          opacity: 1;
         }
 
-        @include keyframes-animation(to-top) {
-          0% {
-            @include prefix-property(transform, translateY(20%));
-            @include prefix-property(opacity, 0);
-          }
-          100% {
-            @include prefix-property(transform, translateY(0));
-            @include prefix-property(opacity, 1);
-          }
-        }
+        // @include keyframes-animation(to-top) {
+        //   0% {
+        //     @include prefix-property(transform, translateY(20%));
+        //     @include prefix-property(opacity, 0);
+        //   }
+        //   100% {
+        //     @include prefix-property(transform, translateY(0));
+        //     @include prefix-property(opacity, 1);
+        //   }
+        // }
       }
     }
 
